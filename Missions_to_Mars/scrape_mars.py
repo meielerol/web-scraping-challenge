@@ -19,11 +19,14 @@ def mars_news(browser):
     html = browser.html
     soup = bs(html,'html.parser')
 
-    # get the first news title and quick summary info
-    slide = soup.select_one("ul.item_list li.slide")
-    title = slide.find('div',class_='content_title').text
-    para = slide.find('div',class_='article_teaser_body').text
-
+    try:
+        # get the first news title and quick summary info
+        slide = soup.select_one("ul.item_list li.slide")
+        title = slide.find('div',class_='content_title').text
+        para = slide.find('div',class_='article_teaser_body').text
+    except:
+        return None, None
+        
     # return the news title and paragraph text
     return title, para
 
